@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: steam
+    database: steam-analiz
+    schema: Steam
+    tables:
+      - name: history
+      - name: players
+      - name: achievements
+      - name: games
