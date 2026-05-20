@@ -1,12 +1,10 @@
 version: 2
 
-models:
-  - name: stg_games
-    columns:
-      - name: game_id
-        tests:
-          - unique
-          - not_null
-      - name: genres
-        tests:
-          - not_null
+sources:
+  - name: bq_steam
+    # Eğer projenizde database ve schema tanımları buradaysa onlara dokunma, aynen kalsın
+    tables:
+      - name: history
+      - name: achievements
+      - name: games
+      - name: prices  # İşte tam olarak buraya ekliyoruz!

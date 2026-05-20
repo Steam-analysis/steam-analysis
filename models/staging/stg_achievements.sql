@@ -3,7 +3,8 @@ with raw_achievements as (
 )
 
 select
+    cast(gameid as string) as game_id,
     cast(achievementid as string) as achievement_id,
-    cast(gameid as string) as game_id
-    
+    title,
+    description
 from raw_achievements
