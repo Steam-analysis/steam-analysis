@@ -7,3 +7,4 @@ sources:
     tables:
       - name: games
       - name: history
+      - name: achievements
