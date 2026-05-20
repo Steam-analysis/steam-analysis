@@ -1,0 +1,29 @@
+{{ config(materialized='table') }}
+
+WITH steam_prices AS (
+    SELECT 
+        game_id,
+        price,
+        currency,
+        updated_at
+    FROM {{ source('steam', 'prices') }}
+),
+
+exchange_rates AS (
+    SELECT 
+        date,
+        rate_to_usd
+    FROM {{ source('steam', 'exchange_rates') }}
+)
+
+SELECT 
+    p.game_id,
+    p.price,
+    p.currency,
+    p.updated_at,
+    e.rate_to_usd,
+    -- Fiyatı dolara çeviriyoruz
+    (p.price / e.rate_to_usd) AS price_in_usd
+FROM steam_prices p
+LEFT JOIN exchange_rates e 
+    ON DATE(p.updated_at) = e.date
