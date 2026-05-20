@@ -1,0 +1,36 @@
+version: 2
+
+sources:
+  - name: steam_raw
+    database: steam-analiz
+    schema: Steam
+    description: Raw Steam platform dataset loaded into BigQuery.
+    tables:
+      - name: players
+        description: Raw player profile table.
+        columns:
+          - name: playerid
+            description: Unique player identifier.
+            tests:
+              - not_null
+              - unique
+          - name: country
+            description: Player country information.
+          - name: created
+            description: Player account creation timestamp.
+
+      - name: history
+        description: Raw achievement activity history table.
+        columns:
+          - name: playerid
+            description: Player identifier connected to achievements.
+            tests:
+              - not_null
+          - name: achievementid
+            description: Achievement identifier unlocked by player.
+            tests:
+              - not_null
+          - name: date_acquired
+            description: Timestamp when the achievement was acquired.
+            tests:
+              - not_null
