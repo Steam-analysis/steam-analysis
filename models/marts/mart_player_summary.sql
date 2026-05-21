@@ -24,13 +24,12 @@ select
     players.player_id,
     players.country,
     players.created_year,
-    purchased.library,
+    purchased.game_id,
     friends.friends
 
 from players
 
 left join purchased
     on players.player_id = purchased.player_id
-
 left join friends
     on players.player_id = friends.player_id
