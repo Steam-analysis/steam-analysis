@@ -1,13 +1,12 @@
 with raw_prices as (
-    select * from `steam-analiz.Steam.prices`
+    select * from {{ source('bq_steam', 'prices') }} -- 👈 Sabit isim yerine source yapısına çektik
 ),
 
 ranked_prices as (
     select
         cast(gameid as string) as game_id,
-        usd as usd_price,
+        cast(usd as float64) as usd_price,
         cast(date_acquired as date) as price_date,
-        -- Oyunun tarihteki en eski fiyatını bulmak için eskinden yeniye sıralıyoruz:
         row_number() over (
             partition by gameid 
             order by date_acquired asc

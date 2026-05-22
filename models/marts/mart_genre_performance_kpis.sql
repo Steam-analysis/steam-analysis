@@ -17,6 +17,7 @@ activity_base as (
         trim(genre) as genre,
         count(distinct h.player_id) as unique_players_activity,
         count(*) as total_activity_count,
+        -- 🎯 DÜZELTME: g.total_achievements_count yerine ga.total_achievements_count yaptık!
         sum(coalesce(ga.total_achievements_count, 0)) as total_possible_achievements_pool,
         count(distinct g.game_id) as total_unique_games
     from {{ ref('stg_history') }} h
@@ -64,7 +65,6 @@ select
     total_activity_count,
     total_unique_games,
 
-    -- 🎯 Tüm KPI'lar sapasağlam ve dinamik hesaplanıyor
     safe_divide(total_activity_count, total_possible_achievements_pool) * 100 as genre_achievement_completion_rate,
     safe_divide(total_activity_count, unique_players_activity) as genre_activity_density,
     safe_divide(genre_revenue_usd, unique_players_activity) as genre_arpu,
