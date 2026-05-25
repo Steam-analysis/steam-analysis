@@ -30,5 +30,12 @@ final_summary as (
     group by estimated_purchase_year, genre
 )
 
-select * from final_summary
+select 
+    estimated_purchase_year,
+    genre,
+    estimated_sales_count,
+    estimated_total_revenue_usd,
+    -- O yılın toplam cirosuna bölerek her türün pazar payını (%) hesaplıyoruz:
+    estimated_total_revenue_usd / sum(estimated_total_revenue_usd) over(partition by estimated_purchase_year) as estimated_revenue_share
+from final_summary
 order by estimated_purchase_year asc, estimated_total_revenue_usd desc
