@@ -91,7 +91,6 @@ As part of a 4-5 member collaborative team, I took ownership of the Steam Market
 
 ## 📊 Dashboards & Media
 
-* 🔗 **Interactive Looker Studio Board:** [Canlı Looker Studio Linkiniz]
 * 📄 **High-Res Screenshots & PDF Report:** Available under the `/docs` folder.
 
 ---
